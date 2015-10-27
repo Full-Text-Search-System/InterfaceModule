@@ -1,10 +1,12 @@
 # InterfaceModule
 
+We use Laravel to build our website achieve the search and add functions in Sphinx.
+
 ##Introduction
 
 The InterfaceModule provides an example website for users to know how to use our Sphinx indexing and searching functions. 
 
-In this module, we have a website built with an PHP framework: laravel. This website has two main functions: search and add.
+In this module, we have a website built with one PHP framework: laravel. This website has two main functions: search and add.
 
 Searching:
 
