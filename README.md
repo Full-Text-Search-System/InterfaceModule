@@ -16,6 +16,7 @@ Adding:
 
 When people click the add button and select several files, these files will send to remote indexing and storage machines. In the indexing machine, it will use all the words in these files to rebuild the indexing and update the Sphinx results list. In the storage machine, it will save the related information like file name, file address, the time of last updating.
 
+PS: Atcually in this website, we have login function and you can register a new account and this function ensure that just staff can use the add function.
 
 ##Steps
 
