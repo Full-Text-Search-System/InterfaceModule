@@ -6,7 +6,7 @@ We use Laravel to build our website achieve the search and add functions in Sphi
 
 The InterfaceModule provides an example website for users to know how to use our Sphinx indexing and searching functions. 
 
-In this module, we have a website built with one PHP framework: laravel. This website has two main functions: search and add.
+In this module, we have a website built with a PHP framework: laravel. This website has two main functions: search and add.
 
 Searching:
 
@@ -18,7 +18,7 @@ When people click the add button and select several files, these files will send
 
 PS: Atcually in this website, we have login function and you can register a new account and this function ensure that just staff can use the add function.
 
-##Steps
+##Delpoyment Steps
 
 In order to install Laravel, we need composer:  
 ###Install composer  
@@ -33,3 +33,5 @@ $ sudo mv composer /usr/local/bin/composer
 ```
 $ composer global require "laravel/installer=~1.1"
 ```
+
+##Run the module
