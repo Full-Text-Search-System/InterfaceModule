@@ -44,22 +44,30 @@ class FilesController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->hasFile('file') || !$request->file('file')->isValid()) {
+        $files = $request->file('file');
+
+        if (!$request->hasFile('file')) {
             return Redirect::back()->withInput()->withErrors('Fail to upload file!');
         }
 
-        // save file's metadata to storage service
-        $file = new File;
-        $file->location = 'file/'.$request->file('file')->getClientOriginalName();
-        $file->name     = $request->file('file')->getClientOriginalName();    
-        if ($file->save()) {
-            // request sphinx service api to create new index for this file
-            $client = new Client();
+        // request sphinx service api to create new index for this file
+        $client = new Client();
+        // $batch_file = ['multipart' => []];
+
+        foreach ($files as $f) {
+            // save each file's metadata to storage service
+            if (!$f->isValid()) 
+                continue;
+            $file = new File;
+            $file->location = 'file/'.$f->getClientOriginalName();
+            $file->name     = $f->getClientOriginalName();  
+            $file->save();
+
             $response = $client->request('POST', 'http://192.168.33.10/api/files', [
                 'multipart' => [
                     [
                         'name' => 'file',
-                        'contents' => fopen($request->file('file')->getRealPath(), 'r'),
+                        'contents' => fopen($f->getRealPath(), 'r'),
                         'filename' => $file->name
                     ],
                     [
@@ -75,11 +83,12 @@ class FilesController extends Controller
             // }
 
             // save file local 
-            $request->file('file')->move('file', $file->name.'_'.$file->id);
-
-            return Redirect::to('admin');
+            $f->move('file', $file->name.'_'.$file->id);
         }
-        return Redirect::back()->withInput()->withErrors('Fail to save!');
+
+        return Redirect::to('admin');
+        
+        // return Redirect::back()->withInput()->withErrors('Fail to save!');
     }
 
     /**

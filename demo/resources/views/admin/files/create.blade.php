@@ -23,7 +23,7 @@
           <form action="{{ URL('admin/files') }}" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <label>Upload File: </label>
-            <input type="file" name="file" class="form-control" required="required">
+            <input type="file" name="file[]" multiple="multiple" class="form-control" required="required">
             <br>
             <button class="btn btn-lg btn-info">Add File</button>
           </form>
