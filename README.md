@@ -42,6 +42,7 @@ $cd demo
 $php artisan serve
 ```
 
+The address of interface is http://localhost:8000/admin
 
 
 
