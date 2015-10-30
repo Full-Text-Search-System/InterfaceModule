@@ -42,7 +42,7 @@ remember to modify the file name to InterfaceModule
 $cd InterfaceModule
 ```
 ```
-$php artisan runserve
+$vagrant up
 ```
 
 Go to browser and type http://localhost:8082/admin
