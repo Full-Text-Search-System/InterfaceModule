@@ -45,5 +45,6 @@ $cd InterfaceModule
 $php artisan runserve
 ```
 
+Go to browser and type http://localhost:8082/admin
 
 
