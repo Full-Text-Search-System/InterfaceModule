@@ -18,31 +18,30 @@ When people click the add button and select several files, these files will send
 
 PS: Atcually in this website, we have login function and you can register a new account and this function ensure that just staff can use the add function.
 
-##Delpoyment Steps
+###Init a Ubuntu 14.04 virtual machine with the required develop envrionment
 
-In order to install Laravel, we need composer:  
-###Install composer  
-```
-$ sudo php -r "readfile('https://getcomposer.org installer')" | sudo php -- --filename=composer
-```  
-```
-$ sudo mv composer /usr/local/bin/composer
-```
+#####We have upload a vagrant box wiht required development envrionment in https://atlas.hashicorp.com/FTS
 
-###Install Laravel:  
+first, change vagrantfile configuration:
 ```
-$ composer global require "laravel/installer=~1.1"
+config.vm.box = "FTS/IndexingModule"
+```
+then,
+```
+$ vagrant up
+```
+now, we can ssh to the virtual machine:
+```
+$ vagrant ssh
 ```
 
 ##Run the module
 ```
-$cd demo
+$cd InterfaceModule
 ```
 ```
-$php artisan serve
+$php artisan runserve
 ```
-
-The address of interface is http://localhost:8000/admin
 
 
 
