@@ -36,6 +36,8 @@ $ vagrant ssh
 ```
 
 ##Run the module
+
+remember to modify the file name to InterfaceModule
 ```
 $cd InterfaceModule
 ```
