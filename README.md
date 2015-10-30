@@ -35,3 +35,13 @@ $ composer global require "laravel/installer=~1.1"
 ```
 
 ##Run the module
+```
+$cd demo
+```
+```
+$php artisan serve
+```
+
+
+
+
