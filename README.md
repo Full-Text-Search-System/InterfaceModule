@@ -18,7 +18,6 @@ When people click the add button and select several files, these files will send
 
 PS: Atcually in this website, we have login function and you can register a new account and this function ensure that just staff can use the add function.
 
-PPS: When you install vagrant by using our VagrantFile, you need to put the file "workspace/demo" into the shared file like "InterfaceModule" of virtual machine and local machine.
 
 ###Init a Ubuntu 14.04 virtual machine with the required develop envrionment
 
@@ -29,7 +28,10 @@ first,
 ```
 $ vagrant up
 ```
-now, we can ssh to the virtual machine:
+
+Now, you need to put the file "workspace/demo" into the file which has Vagrantfile.
+
+If you want to modify the virtual machine, you can ssh to the virtual machine:
 ```
 $ vagrant ssh
 ```
