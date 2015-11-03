@@ -24,11 +24,8 @@ PPS: When you install vagrant by using our VagrantFile, you need to put the file
 
 #####We have upload a vagrant box wiht required development envrionment in https://atlas.hashicorp.com/FTS
 
-first, change vagrantfile configuration:
-```
-config.vm.box = "FTS/IndexingModule"
-```
-then,
+
+first,
 ```
 $ vagrant up
 ```
