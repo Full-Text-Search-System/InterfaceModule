@@ -23,14 +23,6 @@ PS: Atcually in this website, we have login function and you can register a new 
 
 #####We have upload a vagrant box wiht required development envrionment in https://atlas.hashicorp.com/FTS
 
-
-first,
-```
-$ vagrant up
-```
-
-Now, you need to put the file "workspace/demo" into the file which has Vagrantfile.
-
 If you want to modify the virtual machine, you can ssh to the virtual machine:
 ```
 $ vagrant ssh
