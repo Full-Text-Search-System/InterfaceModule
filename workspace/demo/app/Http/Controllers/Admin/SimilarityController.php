@@ -121,15 +121,37 @@ class SimilarityController extends Controller
             $tmp = explode (',', $list[$id]);
             for ($i=0; $i<count($tmp); $i++) {
                 $split = explode ('|', $tmp[$i]);
-                $tmpfile = File::find($split[0]);
-                $name = $tmpfile->name;
-                $res[$i] = array($name,$split[1]);
+                $tt[$split[0]] = $split[1];
+                // $tmpfile = File::find($split[0]);
+                // $name = $tmpfile->name;
+                // $res[$i] = array($name,$split[1]);
             }
-            $tmpfile = File::find($id);
-            $name = $tmpfile->name;
-            $res[count($res)] = array($name,0);   
+            // $tmpfile = File::find($id);
+            // $name = $tmpfile->name;
+            // $res[count($res)] = array($name,0);   
         }
-        
+        arsort($tt);
+        $count = 0;
+        if(count($tt)>6){
+            foreach($tt as $x=>$x_value){
+                if($count > 6){
+                    break;
+                }
+                $tmpfile = File::find($x);
+                $name = $tmpfile->name;
+                $res[$count++] = array($name,$x_value);
+                
+            }
+        }else{
+            foreach($tt as $x=>$x_value){
+                 $tmpfile = File::find($x);
+                 $name = $tmpfile->name;
+                $res[$count++] = array($name,$x_value);
+            }
+        }
+        $tmpfile = File::find($id);
+        $name = $tmpfile->name;
+        $res[count($res)] = array($name,0);   
 
         // $result ='';
         // foreach($res as $r ){
