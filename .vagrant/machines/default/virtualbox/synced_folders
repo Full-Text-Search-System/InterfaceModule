@@ -1,0 +1,1 @@
+{"virtualbox":{"/var/www":{"mount_options":["dmode=777","fmode=666"],"guestpath":"/var/www","hostpath":"/Users/zhengkaiming/Documents/InterfaceModule/workspace","disabled":false},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/zhengkaiming/Documents/InterfaceModule","disabled":false}}}

@@ -28,4 +28,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 	Route::get('/', 'AdminHomeController@index');
 	Route::resource('/search', 'sphinxController');
 	Route::resource('files', 'FilesController'); //restful api handler
+	Route::resource('similarity', 'SimilarityController');
 });  

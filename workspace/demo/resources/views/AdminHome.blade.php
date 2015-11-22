@@ -34,9 +34,11 @@
         <div class="panel-body">
 
         <a href="{{ URL('admin/files/create') }}" class="btn btn-lg btn-primary">Add</a>
+        <!-- <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">similarity</a> -->
           @foreach ($files as $file)
             <hr>
             <div class="page">
+              <a href="{{ URL('admin/similarity/'.$file->id) }}">{{ $file->name }}</a>
               <h4>{{ $file->name }}</h4>
               <div class="content">
                 <a href="{{ URL('admin/files/'.$file->id) }}">Click to download file</a>
