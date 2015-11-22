@@ -7,9 +7,6 @@
   <article class="entry">
     
     <div class="entry-wrapper">
-      <header class="entry-header">
-        <h1 class="entry-title">Chord Diagram</h1>
-      </header>
       <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">Return</a>
       <div class="entry-content">
         <div id="chart" style="width: 50%; margin: 0px auto; position: relative;"></div>

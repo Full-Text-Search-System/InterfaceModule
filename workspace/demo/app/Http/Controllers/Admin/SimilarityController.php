@@ -105,13 +105,13 @@ class SimilarityController extends Controller
         $name = $file->name;
 
 
-        $a = file('file/score.txt');
+        $a = file('doc_similarity/SPH_score.txt');
         $tt;
         $list = array();
         $index = 0;
 
-        foreach($a as $line => $content){
-            $tmp = explode (':', $content);
+        foreach($a as $line){
+            $tmp = explode (':', $line);
             $list[$tmp[0]] = $tmp[1];
         }
 
