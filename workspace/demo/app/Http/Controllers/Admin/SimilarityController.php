@@ -121,7 +121,10 @@ class SimilarityController extends Controller
             $tmp = explode (',', $list[$id]);
             for ($i=0; $i<count($tmp); $i++) {
                 $split = explode ('|', $tmp[$i]);
-                $tt[$split[0]] = $split[1];
+                if($split[1] != 0){
+                    $tt[$split[0]] = $split[1];
+                }
+                
                 // $tmpfile = File::find($split[0]);
                 // $name = $tmpfile->name;
                 // $res[$i] = array($name,$split[1]);
