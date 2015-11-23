@@ -20,7 +20,7 @@ if ($res->num_rows > 0) {
     // get id and name
     while($row = $res->fetch_assoc()) {
         $fileName = $row['filename'].'_'.$row["doc_id"];
-        array_push($fileNames, $fileName);
+        $fileNames[$row["doc_id"]] = $fileName;
     }
 }
 $conn->close();
@@ -29,48 +29,49 @@ $conn->close();
 $lines = array();
 $scoreFile = fopen('SPH_score.txt', 'r');
 while (!feof($scoreFile)) {
-	$line = explode(':', fgets($scoreFile));
+	$str = chop(fgets($scoreFile));
+	if ($str == "") continue;
+	$line = explode(':', $str);
 	$lines[$line[0]] = $line[1];
 }
 fclose($scoreFile);
 
 // build vector file for doc, then compute score and update score matrix
-foreach ($fileNames as $f) {
-	VectorBuilder::build('file', $f);
-	computeScore('V_'.$f, $lines);
+foreach ($fileNames as $id => $f) {
+	VectorBuilder::build('../file', $f);
+	$lines = computeScore($id , $f, $lines);
 }
 
 // write score matrix into SPH_score.txt
 $scoreFile = fopen('SPH_score.txt', 'w');
 foreach ($lines as $key => $val) {
-	fwrite($scoreFile, $key.":"."\r\n");
+	fwrite($scoreFile, $key.":".$val."\r\n");
 }
 fclose($scoreFile);
 
 
 // foreach doc, compute score and append result to SPH_score.txt
-function computeScore($vector, $scoreMatrix) {
+function computeScore($docID, $vector, $scoreMatrix) {
 	/*********************************
 	* compute score between two file *
 	**********************************/
 
 	// SetIDRange
 	$cl = new SphinxClient();
-    $cl->setServer('127.0.0.1', 9312);
+    $cl->setServer('192.168.33.10', 9312);
     
     $cl->setMatchMode(SPH_MATCH_ANY);
     $cl->setRankingMode(SPH_RANK_BM25);
 
     // can set weight for each field
 
-    $vFile = fopen($vector, 'r');
+    $vFile = fopen('vector/V_'.$vector, 'r');
 	$v = "";
 	$s = floatval(fgets($vFile));
 	$time = 0;
 	while (!feof($vFile)) {
 		$line = explode(" ", fgets($vFile));
 		if (floatval($line[1]) < 10) continue;
-		// $tf = floatval($line[1]) / $s1;
 		$v .= " ".$line[0];
 		$time++;
 	}
@@ -78,12 +79,24 @@ function computeScore($vector, $scoreMatrix) {
 
     $result = $cl->Query($v, 'test1, testrt');
     
-    $docID = "";
     $newRecord = "";
 
+    $count = 0;
     foreach ($scoreMatrix as $row => $col) {
-		$col .= ','.$docID.'|'.$result['matches'][$row]['weight'];
-		$newRecord .= ','.$row.'|'.$result['matches'][$row]['weight'];
+    	$score = "0";
+    	if ($result['total_found'] != '0' && array_key_exists($row, $result['matches'])) {
+    		$score = $result['matches'][$row]['weight'];
+		}
+
+		$col .= ','.$docID.'|'.$score;
+		$scoreMatrix[$row] = $col;
+		$newRecord .= $row.'|'.$score;
+		if ($count < count($scoreMatrix)-1) {
+			$newRecord .= ',';
+			$count++;
+		}
     }
+
     $scoreMatrix[$docID] = $newRecord;
+    return $scoreMatrix;
 }
