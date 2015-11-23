@@ -14,7 +14,7 @@ $dbname = "laravel";
 
 // create mysql connection 
 $conn = new mysqli($servername, $username, $password, $dbname);
-$sql = "select doc_id, filename from similarityfiles";
+$sql = "SELECT doc_id, filename FROM similarityfiles";
 $res = $conn->query($sql);
 if ($res->num_rows > 0) {
     // get id and name
@@ -48,6 +48,15 @@ foreach ($lines as $key => $val) {
 	fwrite($scoreFile, $key.":".$val."\r\n");
 }
 fclose($scoreFile);
+
+// delete record in database
+$conn = new mysqli($servername, $username, $password, $dbname);
+$base = "DELETE FROM similarityfiles WHERE doc_id='";
+foreach ($fileNames as $doc_id => $value) {
+	$sql = $base.$doc_id."'";
+	$res = $conn->query($sql);
+}
+$conn->close();
 
 
 // foreach doc, compute score and append result to SPH_score.txt
