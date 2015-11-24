@@ -6,10 +6,11 @@
 <div id="main" role="main">
   <article class="entry">
     
-    <div class="entry-wrapper">
-      <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">Return</a>
+    <div class="entry-wrapper" style="float: left">
+      <!-- <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">Return</a> -->
       <div class="entry-content">
-        <div id="chart" style="width: 50%; margin: 0px auto; position: relative;"></div>
+        <div id="chart" style="width: 100%; margin: 0px auto; position: relative;"></div>
+      
         
 <p style="color:black; font-size: 100%; text-align: center;">This chord diagram shows pairwise similarity between documents in our full-text search system.</p>
 <style>
@@ -143,26 +144,21 @@ function mouseover(d, i) {
 }
 </script>
 
-
       </div><!-- /.entry-content -->
     </div><!-- /.entry-wrapper -->
+    <label class="label label-default">{{ $first[count($first)-1][0] }}</label>
+    <p></p>
+    <ul>
+        @for($i=0; $i<count($first)-1; $i++)
+        <li>
+          <p> {{$first[$i][0]."  :  ".$first[$i][1]}}</p>
+        </li>
+        @endfor
+      </ul>
   </article>
 </div><!-- /#main -->
 
   <div class="row">
-    <!-- <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-        <div class="panel-heading">Similarity</div>
-          <div class="panel-body">
-          </div>
-        <div class="panel-body"> -->
-
-        <!-- <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">Return</a> -->
-<!--         <a href="{{ URL('admin/similarity/create') }}" class="btn btn-lg btn-primary">similarity</a>
-        
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 @endsection

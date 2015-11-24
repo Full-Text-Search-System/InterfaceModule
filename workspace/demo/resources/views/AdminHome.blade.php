@@ -38,9 +38,10 @@
           @foreach ($files as $file)
             <hr>
             <div class="page">
-              <a href="{{ URL('admin/similarity/'.$file->id) }}">{{ $file->name }}</a>
               <h4>{{ $file->name }}</h4>
               <div class="content">
+                <a href="{{ URL('admin/similarity/'.$file->id) }}">Click to see relevant files</a>
+                &nbsp&nbsp|&nbsp&nbsp
                 <a href="{{ URL('admin/files/'.$file->id) }}">Click to download file</a>
               </div>
             </div>
