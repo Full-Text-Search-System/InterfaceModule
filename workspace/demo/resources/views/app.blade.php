@@ -28,7 +28,9 @@
 				<ul class="nav navbar-nav">
 					<li><a href="/admin">Admin</a></li>
 				</ul>
-
+				<ul class="nav navbar-nav">
+					<li><a href="#" onclick="window.open('/admin/similarityall', '');">Similarity-All</a></li>
+				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="/auth/login">Login</a></li>

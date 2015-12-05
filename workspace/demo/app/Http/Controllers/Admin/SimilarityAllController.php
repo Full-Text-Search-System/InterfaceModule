@@ -7,11 +7,11 @@ use Illuminate\Http\Request, Response;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\File;
+
 use Redirect, Input;
 
-use GuzzleHttp\Client;
-
-class SphinxController extends Controller
+class SimilarityAllController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,24 +20,46 @@ class SphinxController extends Controller
      */
     public function index()
     {
-        $keyword = Input::get('keyword');
-        $rank_mode = Input::get('rankMode');
-        $match_mode = Input::get('matchMode');
+        $a = file('doc_similarity/SPH_score.txt');
+        $list = array();
 
-        // request sphinx service api to search by keyword
-        $client = new Client(['base_uri' => 'http://192.168.33.10/api/']);
-        $response = $client->request('GET', 'search', [
-            'json' => 
-                [
-                    'keyword' => $keyword,
-                    'rank_mode' => $rank_mode,
-                    'match_mode' => $match_mode
-                ]
-        ]);
+        $nameList = array();
 
-        $json = json_decode($response->getBody()->getContents());
+        foreach($a as $line){
+            $tmp = explode (':', $line);
+            // store file name into list
+            $file = File::find($tmp[0]);
+            $name = $file->name;
+            array_push($nameList, $name);
+            $list[$tmp[0]] = $tmp[1];
+        }
 
-        return Redirect::to('admin')->with('data', $json);
+        $res = array();
+
+        $count = 0;
+        foreach ($list as $key => $value) {
+            $pairs = explode (',', $value);
+            $scoreList = [];
+            $index = 0;
+            foreach ($pairs as $p) {
+                if ($count == $index) {
+                    array_push($scoreList, '0');
+                }
+                $tmp = explode('|', $p);
+                array_push($scoreList, $tmp[1]);
+                $index++;
+            }
+            array_push($res, $scoreList);
+            $count++;
+        }
+
+        // add 0 to the last one
+        array_push($res[count($res)-1], '0');
+        
+        $data['res'] = $res;
+        $data['filenames'] = $nameList;
+
+        return view('SimilarityAll', $data);
     }
 
     /**
@@ -47,7 +69,7 @@ class SphinxController extends Controller
      */
     public function create()
     {
-        
+        return Redirect::to('admin');
     }
 
     /**
@@ -58,7 +80,7 @@ class SphinxController extends Controller
      */
     public function store(Request $request)
     {
-
+        
     }
 
     /**
@@ -69,7 +91,7 @@ class SphinxController extends Controller
      */
     public function show($id)
     {
-    
+        
     }
 
     /**

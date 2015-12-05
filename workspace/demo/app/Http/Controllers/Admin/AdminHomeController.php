@@ -20,14 +20,30 @@ class AdminHomeController extends Controller
      */
     public function index()
     {
-        $idList = Session::get('ids');
+        $val = [];
+
+        $data = Session::get('data');
+        Session::forget('data');
+        if ($data == null) {
+            $val['files'] = array();
+            $val['matchMode'] = 'SPH_MATCH_BOOLEAN';
+            $val['rankMode'] = 'SPH_RANK_PROXIMITY_BM25';
+            
+            return view('AdminHome', $val);
+        }
+
+        $idList = $data->ids;
 
         $files = array();
         for ($i=0; $i<count($idList); $i++) {
             $files[$i] = File::find($idList[$i]);
         }
 
-        return view('AdminHome')->withFiles($files);
+        $val['files'] = $files;
+        $val['matchMode'] = $data->matchMode;
+        $val['rankMode'] = $data->rankMode;
+
+        return view('AdminHome', $val);
     }
 
     /**

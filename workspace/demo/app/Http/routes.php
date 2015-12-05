@@ -29,4 +29,5 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 	Route::resource('/search', 'sphinxController');
 	Route::resource('files', 'FilesController'); //restful api handler
 	Route::resource('similarity', 'SimilarityController');
+	Route::resource('similarityall', 'SimilarityAllController');
 });  
