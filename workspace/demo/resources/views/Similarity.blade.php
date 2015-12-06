@@ -63,7 +63,6 @@ var txtName = new Array();
 var score = new Array();
 var index = 0;
 var citie = new Array();
-var tttt = '"' +index+'"';
 @foreach($first as $value)
     citie.push({"name":"{{$value[0]}}", "color":"#F781BF"});
     score[index] = {{ $value[1] }}
