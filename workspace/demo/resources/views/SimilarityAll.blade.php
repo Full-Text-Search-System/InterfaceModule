@@ -63,7 +63,6 @@ var txtName = new Array();
 
 var index = 0;
 var citie = new Array();
-var tttt = '"' +index+'"';
 @foreach($filenames as $value)
     citie.push({"name":"{{$value}}", "color":"#F781BF"});
     index++;
