@@ -5,11 +5,11 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
       <div class="panel panel-default">
-        <div class="panel-heading">Admin Home</div>
+        <div class="panel-heading">Search Home</div>
           <div class="panel-body">
             <form action="{{ URL('admin/search') }}" method="GET">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="text" name="keyword" class="form-control" required="required">
+              <input type="text" name="keyword" class="form-control" required="required" value="{{ $keyword }}">
               <br>
               <label class="label label-default">Match Mode</label>
               <select class="form-control" name="matchMode">
@@ -39,7 +39,7 @@
             <div class="page">
               <h4>{{ $file->name }}</h4>
               <div class="content">
-                <a href="#" onclick="window.open('{{ URL('admin/similarity/'.$file->id) }}', '');">Click to see relative files</a>
+                <a href="#" onclick="window.open('{{ URL('admin/similarity/'.$file->id) }}', '');">Click to see related files</a>
                 &nbsp&nbsp|&nbsp&nbsp
                 <a href="{{ URL('admin/files/'.$file->id) }}">Click to download file</a>
               </div>

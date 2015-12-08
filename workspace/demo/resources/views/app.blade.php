@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>Data Indexing System</title>
 
 	<link href="/css/app.css" rel="stylesheet">
 
@@ -21,15 +21,15 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Data Indexing</a>
+				<span class="navbar-brand">Data Indexing System</span>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
-					<li><a href="/admin">Admin</a></li>
+					<li><a href="/admin">Search</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="#" onclick="window.open('/admin/similarityall', '');">Similarity-All</a></li>
+					<li><a href="#" onclick="window.open('/admin/similarityall', '');">Similarity-Diagram</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
