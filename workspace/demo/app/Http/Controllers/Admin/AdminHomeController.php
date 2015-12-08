@@ -28,6 +28,7 @@ class AdminHomeController extends Controller
             $val['files'] = array();
             $val['matchMode'] = 'SPH_MATCH_BOOLEAN';
             $val['rankMode'] = 'SPH_RANK_PROXIMITY_BM25';
+            $val['keyword'] = '';
             
             return view('AdminHome', $val);
         }
@@ -42,6 +43,7 @@ class AdminHomeController extends Controller
         $val['files'] = $files;
         $val['matchMode'] = $data->matchMode;
         $val['rankMode'] = $data->rankMode;
+        $val['keyword'] = $data->keyword;
 
         return view('AdminHome', $val);
     }

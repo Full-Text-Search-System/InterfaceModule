@@ -21,6 +21,7 @@ class SphinxController extends Controller
     public function index()
     {
         $keyword = Input::get('keyword');
+        if ($keyword == '') $keyword = ' ';
         $rank_mode = Input::get('rankMode');
         $match_mode = Input::get('matchMode');
 
