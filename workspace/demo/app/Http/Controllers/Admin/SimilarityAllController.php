@@ -24,6 +24,7 @@ class SimilarityAllController extends Controller
         $list = array();
 
         $nameList = array();
+        $idList = array();
 
         foreach($a as $line){
             $tmp = explode (':', $line);
@@ -31,6 +32,7 @@ class SimilarityAllController extends Controller
             $file = File::find($tmp[0]);
             $name = $file->name;
             array_push($nameList, $name);
+            array_push($idList, $tmp[0]);
             $list[$tmp[0]] = $tmp[1];
         }
 
@@ -58,6 +60,7 @@ class SimilarityAllController extends Controller
         
         $data['res'] = $res;
         $data['filenames'] = $nameList;
+        $data['ids'] = $idList;
 
         return view('SimilarityAll', $data);
     }
